@@ -1,4 +1,3 @@
-var assert = require("assert");
 var tap = require("tap");
 var test = tap.test;
 var fa;
