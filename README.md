@@ -16,6 +16,39 @@ var request_log = fa.newFixedValueHistory(100);
   var mean = request_log.mean();
 ```
 
+Another example use it to easily track the min and max values of a series:
+```javascript
+  var ts_range = newFixedValueHistory(2);
+  var db_results = ...;
+  for (var i = 0; i < db_results.length; i++) {
+    // do something with the results...
+    ts_range.push(db_results[i].timestamp);
+  }
+
+  some_function(ts_range.min(), ts_range.max());
+```
+
+Versus:
+```javascript
+  var min, max;
+  var db_results = ...;
+  for (var i = 0; i < db_results.length; i++) {
+    // do something with the results...
+    if (isNaN(min) || db_results[i].timestamp < min) {
+      if (!isNaN(db_results[i].timestamp)) {
+        min = db_results[i].timestamp;
+      }
+    }
+    if (isNaN(max) || db_results[i].timestamp > max) {
+      if (!isNaN(db_results[i].timestamp)) {
+        max = db_results[i].timestamp;
+      }
+    }
+  }
+
+  some_function(min, max);
+```
+
 install
 =======
 
