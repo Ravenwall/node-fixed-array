@@ -23,6 +23,11 @@ with [npm](http://npmjs.org), do:
 
     npm install fixed-array
 
+browser version
+===============
+
+`fixed-array.min.js` is a minified version that should work in your browser. This has not been fully tested for compatibility, so please let me know if you run into any issues.
+
 methods
 =======
 
