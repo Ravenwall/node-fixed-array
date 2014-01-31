@@ -5,7 +5,7 @@
   "author": "Bryce B. Baril <bryce@ravenwall.com>",
   "dependencies": {},
   "devDependencies": {
-    "tap": ">=0.3.x"
+    "tap": ">=0.4.x"
   },
   "keywords": [
     "array",
@@ -14,11 +14,23 @@
     "length",
     "stats"
   ],
-  "repository": {"type": "git", "url": "http://github.com/Ravenwall/node-fixed-array.git"},
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/Ravenwall/node-fixed-array.git"
+  },
   "main": "lib/index.js",
   "directories": {
-    "lib": "./lib",
-    "test": "./test"
+    "test": "test"
   },
-  "engines": { "node": "*" }
+  "engines": {
+    "node": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/Ravenwall/node-fixed-array/issues"
+  },
+  "homepage": "https://github.com/Ravenwall/node-fixed-array",
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "license": "MIT"
 }
