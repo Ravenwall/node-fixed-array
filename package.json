@@ -1,7 +1,7 @@
 {
   "name": "fixed-array",
   "description": "A small utility for storing and working with a fixed-length history of (ususally numeric) values.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Bryce B. Baril <bryce@ravenwall.com>",
   "dependencies": {},
   "devDependencies": {
