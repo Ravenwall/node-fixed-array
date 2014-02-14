@@ -13,7 +13,7 @@ test("load", function (t) {
 
 // create
 test("create-empty", function (t) {
-  t.plan(7);
+  t.plan(8);
 
   var fvh = fa.newFixedValueHistory(100);
   t.ok(fvh instanceof fa.FixedValueHistory, "Type should be a FixedValueHistory");
@@ -22,6 +22,7 @@ test("create-empty", function (t) {
   t.ok(isNaN(fvh.min()), "Initial min is NaN");
   t.ok(isNaN(fvh.max()), "Initial max is NaN");
   t.ok(isNaN(fvh.mean()), "Initial mean is NaN");
+  t.ok(isNaN(fvh.variance()), "Initial variance is NaN");
 
   var expected = [];
   t.equivalent(fvh.values(), expected);
@@ -118,7 +119,7 @@ test("push", function (t) {
 
 // non-numeric input
 test("non-numeric", function (t) {
-  t.plan(11);
+  t.plan(13);
 
   var max_length = 5;
   var fvh = fa.newFixedValueHistory(max_length);
@@ -127,7 +128,8 @@ test("non-numeric", function (t) {
   t.equal(fvh.sum, 0);
   t.ok(isNaN(fvh.min()), "Initial min is NaN");
   t.ok(isNaN(fvh.max()), "Initial max is NaN");
-  t.equal(fvh.mean(), 0, "Initial mean is NaN");
+  t.equal(fvh.mean(), 0, "Mean adjusted for NaN values as NULL");
+  t.equal(fvh.variance(), 0, "Variance adjusted for NaN values as NULL");
 
   fvh.push(1);
   t.equal(fvh.length(), 2, "Length shows value pushed");
@@ -135,6 +137,7 @@ test("non-numeric", function (t) {
   t.ok(isNaN(fvh.min()), "min when there is a NaN is NaN");
   t.ok(isNaN(fvh.max()), "max when there is a NaN is NaN");
   t.equal(fvh.mean(), 1/2, "Mean adjusted for NaN values as NULL");
+  t.equal(fvh.variance(), 0.25, "Variance adjusted for NaN values as NULL ("+fvh.variance()+" == 0.25)");
 
   var expected = ["cat", 1];
   t.equivalent(fvh.values(), expected);
