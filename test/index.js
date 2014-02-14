@@ -65,7 +65,7 @@ test("create-overpopulated", function (t) {
 
 // push
 test("push", function (t) {
-  t.plan(26);
+  t.plan(31);
 
   var max_length = 5;
   var fvh = fa.newFixedValueHistory(max_length);
@@ -75,6 +75,7 @@ test("push", function (t) {
   t.equal(fvh.min(), 1);
   t.equal(fvh.max(), 1);
   t.equal(fvh.mean(), 1);
+  t.equal(fvh.variance(), 0);
 
   fvh.push(9);
   t.equal(fvh.length(), 2, "Length shows value pushed");
@@ -82,6 +83,7 @@ test("push", function (t) {
   t.equal(fvh.min(), 1);
   t.equal(fvh.max(), 9);
   t.equal(fvh.mean(), 5);
+  t.equal(fvh.variance(), 16);
 
   fvh.push([5, 5]);
   t.equal(fvh.length(), 4, "Length shows values pushed");
@@ -89,6 +91,7 @@ test("push", function (t) {
   t.equal(fvh.min(), 1);
   t.equal(fvh.max(), 9);
   t.equal(fvh.mean(), 5);
+  t.equal(fvh.variance(), 8, "variance " + fvh.variance() + " should equal 8");
 
   fvh.push([5, 5]);
   t.equal(fvh.length(), max_length, "Length shows values pushed and one expired");
@@ -96,6 +99,7 @@ test("push", function (t) {
   t.equal(fvh.min(), 5);
   t.equal(fvh.max(), 9);
   t.equal(fvh.mean(), 29/5);
+  t.equal(fvh.variance().toFixed(6), "2.560000"); //javascript is unable to accurately store 2.56 due to floating point issues.
 
   // Pushing on more than max_length
   fvh.push([1, 1, 1, 1, 1, 1]);
@@ -104,6 +108,7 @@ test("push", function (t) {
   t.equal(fvh.min(), 1);
   t.equal(fvh.max(), 1);
   t.equal(fvh.mean(), 1);
+  t.equal(fvh.variance(), 0);
 
   var expected = [1, 1, 1, 1, 1];
   t.equivalent(fvh.values(), expected);
