@@ -29,7 +29,7 @@ test("create-empty", function (t) {
   t.end();
 });
 test("create-populated", function (t) {
-  t.plan(6);
+  t.plan(7);
 
   var initial = [10, 0, 3, 11, 20, 22, 2, 99, 19];
   var fvh = fa.newFixedValueHistory(100, initial);
@@ -39,11 +39,12 @@ test("create-populated", function (t) {
   t.equal(fvh.min(), 0, "Initial min is 0");
   t.equal(fvh.max(), 99, "Initial max is 99");
   t.equal(fvh.mean(), 186/9, "Initial mean is 186 / 9");
+  t.equal(fvh.variance(), 7436/9, "Initial variance is 7436 / 9");
 
   t.end();
 });
 test("create-overpopulated", function (t) {
-  t.plan(7);
+  t.plan(8);
 
   var initial = [10, 0, 3, 11, 20, 22, 2, 99, 19];
   var max_length = 5;
@@ -54,6 +55,7 @@ test("create-overpopulated", function (t) {
   t.equal(fvh.min(), 2, "Initial min is 2");
   t.equal(fvh.max(), 99, "Initial max is 99");
   t.equal(fvh.mean(), 162/5, "Initial mean is 162 / 5");
+  t.equal(fvh.variance(), 5801.2/5, "Initial variance is 5801.2 / 5");
 
   var expected = [20, 22, 2, 99, 19];
   t.equivalent(fvh.values(), expected);
