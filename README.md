@@ -89,6 +89,13 @@ Return the largest value in the current data. If any NaN entries are present, re
 
 Calculate and return the mean of the current data. Any non-numeric items will be considered NULL during sum, affecting the mean.
 
+.variance()
+==========
+
+Calculate and return the variance of the current data. Any non-numeric items will be considered NULL during sum, affecting the variance.
+
+*NOTE: unlike the other operations (sum, min, max), this is O(n), not O(1)*
+
 .length()
 ============
 
