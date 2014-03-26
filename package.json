@@ -3,9 +3,9 @@
   "description": "A small utility for storing and working with a fixed-length history of (ususally numeric) values.",
   "version": "0.2.0",
   "author": "Bryce B. Baril <bryce@ravenwall.com>",
-  "dependencies": {},
+  "dependencies": { },
   "devDependencies": {
-    "tap": ">=0.4.x"
+    "tape": "~2.12.0"
   },
   "keywords": [
     "array",
@@ -18,7 +18,7 @@
     "type": "git",
     "url": "http://github.com/Ravenwall/node-fixed-array.git"
   },
-  "main": "lib/index.js",
+  "main": "fixed-array.js",
   "directories": {
     "test": "test"
   },
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/Ravenwall/node-fixed-array",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "node test/"
   },
   "license": "MIT"
 }

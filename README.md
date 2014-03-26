@@ -1,11 +1,13 @@
 # fixed-array
 
+[![NPM](https://nodei.co/npm/fixed-array.png)](https://nodei.co/npm/fixed-array/)
+
 A simple fixed-size array/history for node.js with some light statistical methods. Intended for use with numeric values, e.g. what were the response times for the last 100 requests processed, and what were their min, max, and mean.
 
 ```javascript
-var fa = require("fixed-array");
+var FixedArray = require("fixed-array");
 
-var request_log = fa.newFixedValueHistory(100);
+var request_log = FixedArray(100);
 
 // ... in your http server after processing your requests:
   request_log.push(request_time);
@@ -18,7 +20,7 @@ var request_log = fa.newFixedValueHistory(100);
 
 Another example use it to easily track the min and max values of a series:
 ```javascript
-  var ts_range = newFixedValueHistory(2);
+  var ts_range = FixedArray(2);
   var db_results = ...;
   for (var i = 0; i < db_results.length; i++) {
     // do something with the results...
@@ -49,64 +51,50 @@ Versus:
   some_function(min, max);
 ```
 
-install
-=======
-
-with [npm](http://npmjs.org), do:
-
-    npm install fixed-array
-
-browser version
-===============
-
-`fixed-array.min.js` is a minified version that should work in your browser. This has not been fully tested for compatibility, so please let me know if you run into any issues.
-
-methods
+API
 =======
 
 fa.newFixedValueHistory(length[, initial_values])
-==========================================================
+---
 
 Create a new fixed-length value history of length `length` with optional `initial_values`
 
 .push(value) .push([values])
-============================
+---
 
 Push the specified value(s) onto the fixed array, removing any older values (in order) required to maintain the fixed-length.
 
 .min()
-=========
+---
 
 Return the smallest value in the current data. If any NaN entries are present, returns NaN.
 
 .max()
-=========
+---
 
 Return the largest value in the current data. If any NaN entries are present, returns NaN.
 
 .mean()
-==========
+---
 
 Calculate and return the mean of the current data. Any non-numeric items will be considered NULL during sum, affecting the mean.
 
 .variance()
-==========
+---
 
 Calculate and return the variance of the current data. Any non-numeric items will be considered NULL during sum, affecting the variance.
 
-*NOTE: unlike the other operations (sum, min, max), this is O(n), not O(1)*
-
 .length()
-============
+---
 
 Return the current length of the dataset.
 
 .sum
-=======
+---
 
 Return the sum of the current data. Any non-numeric items will be skipped in the sum.
 
 .values()
-============
+---
 
 Returns a *copy* of the values currently stored.
